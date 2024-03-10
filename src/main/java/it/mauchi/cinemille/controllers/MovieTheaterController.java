@@ -6,29 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.mauchi.cinemille.models.MovieTheaterModel;
 import it.mauchi.cinemille.services.MovieTheaterService;
 
-@RestController("movie-theaters")
+@RestController
 public class MovieTheaterController {
 
 	@Autowired
 	private MovieTheaterService movieTheaterService;
 
-	@GetMapping
-	public List<MovieTheaterModel> getAll(int pageNumber, int pageSize, String sortField, boolean desc) {
+	@GetMapping("/movie-theaters")
+	public List<MovieTheaterModel> getAllMovieTheaters(@RequestParam int pageNumber, @RequestParam int pageSize, @RequestParam String sortField, @RequestParam boolean desc) {
 		return movieTheaterService.getAll(pageNumber, pageSize, sortField, desc);
 	}
 
-	@PutMapping
-	public MovieTheaterModel save(MovieTheaterModel m) {
+	@PutMapping("/movie-theater")
+	public MovieTheaterModel saveMovieTheater(@RequestBody MovieTheaterModel m) {
 		return movieTheaterService.save(m);
 	}
 
-	@DeleteMapping
-	public void delete(Long id) {
+	@DeleteMapping("/movie-theater/{id}")
+	public void deleteMovieTheaterById(@RequestParam Long id) {
 		movieTheaterService.delete(id);
 	}
 
