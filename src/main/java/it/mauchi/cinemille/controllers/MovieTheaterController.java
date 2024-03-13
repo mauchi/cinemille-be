@@ -3,8 +3,10 @@ package it.mauchi.cinemille.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.mauchi.cinemille.models.MovieTheaterModel;
 import it.mauchi.cinemille.services.MovieTheaterService;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 public class MovieTheaterController {
 
@@ -30,7 +33,7 @@ public class MovieTheaterController {
 	}
 
 	@DeleteMapping("/movie-theater/{id}")
-	public void deleteMovieTheaterById(@RequestParam Long id) {
+	public void deleteMovieTheaterById(@PathVariable Long id) {
 		movieTheaterService.delete(id);
 	}
 

@@ -1,5 +1,6 @@
 package it.mauchi.cinemille.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,14 @@ public class ScreeningService {
 
 	public void delete(Long id) {
 		screeningRepository.deleteById(id);
+	}
+
+	public List<ScreeningModel> getWeekly(LocalDate startDate, LocalDate endDate) {
+		return screeningRepository.findAll().stream().filter(screening -> {
+			return startDate.isAfter(screening.getStartDate()) && startDate.isBefore(screening.getEndDate())
+					|| endDate.isAfter(screening.getStartDate()) && endDate.isBefore(screening.getEndDate())
+					|| startDate.isEqual(screening.getStartDate()) && endDate.isEqual(screening.getEndDate());
+		}).map(e -> ScreeningMapper.fromEntityToModel(e)).toList();
 	}
 
 }

@@ -8,8 +8,8 @@ public class ScreeningMapper {
 	public static ScreeningModel fromEntityToModel(Screening e) {
 		ScreeningModel m = new ScreeningModel();
 		m.setId(e.getId());
-		m.setMovie(e.getMovie());
-		m.setMovieTheater(e.getMovieTheater());
+		m.setMovie(MovieMapper.fromEntityToModel(e.getMovie()));
+		m.setMovieTheater(MovieTheaterMapper.fromEntityToModel(e.getMovieTheater()));
 		m.setStartDate(e.getStartDate());
 		m.setEndDate(e.getEndDate());
 		return m;
@@ -18,8 +18,8 @@ public class ScreeningMapper {
 	public static Screening fromModelToEntity(ScreeningModel m) {
 		Screening e = new Screening();
 		e.setId(m.getId());
-		e.setMovie(m.getMovie());
-		e.setMovieTheater(m.getMovieTheater());
+		e.setMovie(MovieMapper.fromModelToEntity(m.getMovie()));
+		e.setMovieTheater(MovieTheaterMapper.fromModelToEntity(m.getMovieTheater()));
 		e.setStartDate(m.getStartDate());
 		e.setEndDate(m.getEndDate());
 		return e;
